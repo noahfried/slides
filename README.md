@@ -6,6 +6,7 @@ Click a link to download directly:
 - [Gambling slides (.pptx)](https://github.com/noahfried/slides/raw/main/Gambling%20slides.pptx)
 - [Gambling slides (.key)](https://github.com/noahfried/slides/raw/main/Gambling%20slides.key)
 - [American Greetings (.pptx)](https://github.com/noahfried/slides/raw/main/American_Greetings.pptx)
+- [Midterms 2026 (.pptx)](https://github.com/noahfried/slides/raw/main/Midterms_2026.pptx)
 
 Google Slides:
 
