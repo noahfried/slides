@@ -19,3 +19,7 @@ PDF slides:
 Google Slides:
 
 - [Intro lesson](https://docs.google.com/presentation/d/1z12CngRXEQ4g2VeZhpwDdB4nneH4S3a3cUGEgizM3UA/edit?usp=sharing)
+
+Photos:
+
+- [Party of the Damned (Google Photos album)](https://photos.google.com/share/AF1QipMH1vu2qIAzX5GfFjqut94_Bq-CUtJLzfgXNj0fcafaZ8ymK68L4RaNEJK-AQhT6Q?key=M29HdnZjbXVQMGdpeGttc0JTTDFES2pyd1BUd0JB)
