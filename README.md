@@ -10,6 +10,11 @@ Click a link to download directly:
 - [American Greetings (.key)](https://github.com/noahfried/slides/raw/main/American_Greetings.key)
 - [Midterms 2026 (.pptx)](https://github.com/noahfried/slides/raw/main/Midterms_2026.pptx)
 
+PDF slides:
+
+- [Cultural Differences (.pdf)](https://github.com/noahfried/slides/raw/main/cultural_differences/cultural_differences.pdf)
+- [Midterms (.pdf)](https://github.com/noahfried/slides/raw/main/midterms/midterms.pdf)
+
 Google Slides:
 
 - [Intro lesson](https://docs.google.com/presentation/d/1z12CngRXEQ4g2VeZhpwDdB4nneH4S3a3cUGEgizM3UA/edit?usp=sharing)
