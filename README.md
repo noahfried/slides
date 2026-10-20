@@ -14,6 +14,7 @@ PDF slides:
 
 - [Cultural Differences (.pdf)](https://github.com/noahfried/slides/raw/main/cultural_differences/cultural_differences.pdf)
 - [Midterms (.pdf)](https://github.com/noahfried/slides/raw/main/midterms/midterms.pdf)
+- [Halloween (.pdf)](https://github.com/noahfried/slides/raw/main/halloween/halloween.pdf)
 
 Google Slides:
 

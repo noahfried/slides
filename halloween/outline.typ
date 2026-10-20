@@ -23,8 +23,12 @@ Caveat: New York Halloween is different from the rest of the country
 
 == Myth vs. Fact
 Guess which of these traditions we actually do on Halloween
+put each of these slide-by-slide with an accompanying photo
+
 1. Wear costumes
 2. Go to multiple houses 
+3. Say the full phrase "Trick-or-treat, smell my feet, give me something good to eat!"
+4. TP (toilet paper) people's houses
 
 == Things we do
 As much candy as possible:
@@ -33,6 +37,7 @@ Insert photo of NYC apt building trick-or-treating sign-up sheet
 + Largest building (high-rises) usually the best
 + Stores also give out candy
 + Get a large pillowcase to collect candy
++ Pumpkin carving
 
 After trick-or-treating
 + Empty the pillowcase onto the floor
@@ -40,7 +45,20 @@ After trick-or-treating
 + Eat candy
 + Feel sick
 
+
 == Things we don't do
++ The 'trick' part of trick-or-treat
++ Going from building-to-building (mostly -- include the link of brownstones https://www.instagram.com/p/DeUcz-WETzg/)
++ Wear elaborate costumes (normal people)
 
 
 == After the age of 16
++ Nobody goes trick-or-treating
++ Halloween parties
++ Usually pretty cringe
++ Costumes get lazier
+FILL IN picture of cat costume but like the lazy versions where people just put on cat ears or whatever
+
+Activity, if we have time:
+Students: GUESS which types of costumes are most popular in the U.S. (maybe like top 5)
+Then reveal answers.
