@@ -110,20 +110,14 @@
     {\large\href{#2}{#3}}
   \end{tcolorbox}}
 
-% SHSAT question slide: \shsatq{number}{subject}{guide page}{which question}{answer}{explanation}
-\newcommand{\guideurl}{https://pwsblobprd.schools.nyc/prd-pws/docs/default-source/default-document-library/nyc-guide-to-the-shsat-for-2027-admissions.pdf}
-\newcommand{\shsatq}[6]{%
-  \begin{frame}[t]{Question #1 of 5: #2}
-    \vspace*{0.3cm}
-    \begin{center}
-      {\large Open the official guide on \textbf{page #3}:}\\[0.4em]
-      {\Large\bfseries\color{navy}#4}\\[1em]
-      {\small\href{\guideurl\##3}{NYC Guide to the SHSAT for 2027 Admissions, p.~#3}}\\[1.6em]
-      \only<1>{{\large\color{muted}Write down your group's answer!}}%
-      \only<2>{{\fontsize{30}{34}\selectfont\bfseries\color{oldred}#5}\\[0.5em]
-               {\small #6}}
-    \end{center}
-    \source{Source: NYC Public Schools / Pearson, \emph{NYC Guide to the SHSAT for 2027 Admissions} (2026).}
+% Slide showing one screenshot from the SHSAT guide: \shsatshot{title}{image}
+\newcommand{\shsatshot}[2]{%
+  \begin{frame}{#1}
+    \vfill
+    \centering
+    \includegraphics[width=\textwidth, height=0.66\textheight, keepaspectratio]{#2}
+    \vfill
+    \source{Source: NYC Public Schools, \emph{NYC Guide to the SHSAT for 2027 Admissions} (2026).}
   \end{frame}}
 
 \title{The NYC School System}
@@ -509,15 +503,37 @@
   \end{itemize}
 \end{frame}
 
-\shsatq{1}{Math}{23}{The marbles question\\{\normalsize\mdseries (Jenny and Keiko)}}{D) 40}{Jenny has $J = 2K$ marbles; after giving 5: $J-5 = (K+5)+10$, so $J = 40$.}
+\shsatshot{Question 1 of 5: English}{shsat_tense_q.png}
+\shsatshot{Question 1: answer}{shsat_tense_ans.png}
 
-\shsatq{2}{Math}{24}{The rectangle question\\{\normalsize\mdseries (perimeter 510 cm, ratio 3:2)}}{F) 153 cm by 102 cm}{Sides $3x$ and $2x$: $10x = 510$, so $x = 51$.}
+\shsatshot{Questions 2--4: read the passage}{shsat_gap_passage1.png}
+\shsatshot{Questions 2--4: read the passage (continued)}{shsat_gap_passage2.png}
 
-\shsatq{3}{Math}{25}{The ``lorgs and dalts'' question\\{\normalsize\mdseries (exchanging money)}}{B) \$52}{140 lorgs $= \$20$ and 16 dalts $= \$32$.}
+\shsatshot{Question 2 of 5: English}{shsat_gap_q1.png}
+\shsatshot{Question 2: answer}{shsat_gap_ans1.png}
 
-\shsatq{4}{English}{17}{The Yankees paragraph\\{\normalsize\mdseries (a shift in verb tense)}}{A) Sentence 1}{``meant'' should be ``means'' or ``will mean.''}
+\shsatshot{Question 3 of 5: English}{shsat_gap_q2.png}
+\shsatshot{Question 3: answer}{shsat_gap_ans2.png}
 
-\shsatq{5}{English}{18}{The Airbnb paragraph\\{\normalsize\mdseries (an error in construction)}}{F) Sentence 2}{The opening phrase should describe the roommates, not the air mattresses.}
+\shsatshot{Question 4 of 5: English}{shsat_gap_q3.png}
+\shsatshot{Question 4: answer}{shsat_gap_ans3.png}
+
+\shsatshot{Question 5 of 5: Math}{shsat_math_q.png}
+
+\begin{frame}{Question 5: answer}
+  \vfill
+  \centering
+  {\fontsize{34}{38}\selectfont\bfseries\color{oldred}63}\\[1.2em]
+  \raggedright
+  \begin{itemize}\setlength{\itemsep}{0.5em}
+    \item Call the two integers $x$ and $x+1$: \quad $x + (x+1) = -15$, so $x = -8$
+    \item The integers are $-8$ and $-7$
+    \item Add 1 to the smaller: $-8 + 1 = -7$. \quad Subtract 2 from the larger: $-7 - 2 = -9$
+    \item Product: $(-7) \times (-9) = \alert{63}$
+  \end{itemize}
+  \vfill
+  \source{Source: NYC Public Schools, \emph{NYC Guide to the SHSAT for 2027 Admissions} (2026).}
+\end{frame}
 
 \begin{frame}{How did you do?}
   \begin{itemize}\setlength{\itemsep}{1em}
