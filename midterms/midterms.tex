@@ -7,7 +7,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric,positioning,calc,arrows.meta}
+\usetikzlibrary{shapes.geometric,positioning,calc,arrows.meta,patterns}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage[most]{tcolorbox}
@@ -302,7 +302,7 @@
           \addplot[fill=navy!35, draw=none] coordinates
             {(Obama (2010),68) (Trump (2018),45) (Biden (2022),57) (Trump (2026),47)};
           \addplot[fill=oldred, draw=none] coordinates
-            {(Obama (2010),45) (Trump (2018),40) (Biden (2022),40) (Trump (2026),37)};
+            {(Obama (2010),45) (Trump (2018),40) (Biden (2022),40) (Trump (2026),38)};
           \legend{First month in office, Before the midterm}
         \end{axis}
       \end{tikzpicture}
@@ -310,11 +310,11 @@
     \begin{column}{0.34\textwidth}
       \begin{itemize}\setlength{\itemsep}{0.8em}
         \item Every recent President was \alert{less popular} at the midterm than at the start
-        \item One in five 2024 Trump voters now say they regret their vote
+        \item In September, one in five 2024 Trump voters said they regretted their vote
       \end{itemize}
     \end{column}
   \end{columns}
-  \source{Presidential job approval. Sources: Gallup; 2026 value is the polling average as of Oct.\ 16, 2026. Regret figure: Navigator Research (Sept.\ 2026).}
+  \source{Presidential job approval. Sources: Gallup; 2026 value is the Nov.\ 3 exit poll (NBC News, CBS News). Regret figure: Navigator Research (Sept.\ 2026).}
 \end{frame}
 
 \begin{frame}{The President's party almost always loses seats}
@@ -343,44 +343,44 @@
   \end{tikzpicture}
 
   \vspace{0.3em}
-  \small The President's party lost House seats in \alert{18 of 20} midterms since 1946. When the President's approval is below 50\%, the average loss is \alert{37 seats}.
+  \small The President's party lost House seats in \alert{18 of the 20} midterms from 1946 to 2022. When the President's approval is below 50\%, the average loss is \alert{37 seats}.
   \source{Sources: University of Michigan Center for Political Studies; Gallup.}
 \end{frame}
 
 % =====================================================================
-\section{The 2026 Midterms}
+\section{The 2026 Campaign}
 
-\begin{frame}{Where things stand}
+\begin{frame}{What the forecasts said}
   \begin{itemize}\setlength{\itemsep}{0.5em}
-    \item Trump is extremely unpopular: about \alert{37\%} approve (one poll: 31\%, his lowest ever)
-    \item Democrats are \textbf{heavily favored} to retake the House and \textbf{favored} to take the Senate
+    \item Trump was deeply unpopular: about \alert{38\%} approved (final Reuters/Ipsos poll: 32\%)
+    \item Democrats were \textbf{heavily favored} to win the House and \textbf{favored} to win the Senate
   \end{itemize}
   \vspace{1.2em}
   \begin{columns}[T]
     \begin{column}{0.24\textwidth}
-      \bignum{dem}{91\%}{House\\\color{muted}Polymarket}
+      \bignum{dem}{94\%}{House\\\color{muted}Markets}
     \end{column}
     \begin{column}{0.24\textwidth}
-      \bignum{dem}{94\%}{House\\\color{muted}Nate Silver}
+      \bignum{dem}{\raisebox{0.32ex}{\Large$\sim$}93\%}{House\\\color{muted}Nate Silver}
     \end{column}
     \begin{column}{0.24\textwidth}
-      \bignum{dem}{64\%}{Senate\\\color{muted}Polymarket}
+      \bignum{dem}{74\%}{Senate\\\color{muted}Markets}
     \end{column}
     \begin{column}{0.24\textwidth}
-      \bignum{dem}{75\%}{Senate\\\color{muted}Nate Silver}
+      \bignum{dem}{80\%}{Senate\\\color{muted}Nate Silver}
     \end{column}
   \end{columns}
   \vspace{0.6em}
-  \begin{center}\footnotesize\color{muted} Chance that Democrats win control, mid-October 2026\end{center}
-  \source{Polymarket is a betting market; Nate Silver's Silver Bulletin is a statistical forecast.}
+  \begin{center}\footnotesize\color{muted} Chance that Democrats would win control, on the eve of the election\end{center}
+  \source{Markets: Kalshi and Polymarket, Nov.\ 2. Silver Bulletin Senate: Nov.\ 2--3; House: October.}
 \end{frame}
 
 \begin{frame}{Democrats: a real shot at the Senate}
   \begin{columns}[c]
     \begin{column}{0.45\textwidth}
       \begin{itemize}\setlength{\itemsep}{0.7em}
-        \item Republicans hold the Senate \textbf{53--47}
-        \item Democrats need to gain \alert{4 seats}
+        \item Republicans held the Senate \textbf{53--47}
+        \item Democrats needed to gain \alert{4 seats}
         \item In early 2025, this looked almost impossible
       \end{itemize}
     \end{column}
@@ -388,9 +388,9 @@
       \centering
       \begin{tikzpicture}
         \begin{axis}[
-            width=8.3cm, height=5.2cm,
-            xmin=0, xmax=24, ymin=0, ymax=100,
-            xtick={2,12,21}, xticklabels={Mar 2025, Jan 2026, Oct 2026},
+            width=7cm, height=5.2cm,
+            xmin=-3, xmax=24, ymin=0, ymax=100,
+            xtick={2,12,22}, xticklabels={Mar 2025, Jan 2026, Nov 2026},
             x tick label style={font=\scriptsize},
             ytick={0,50,100}, yticklabels={0\%,50\%,100\%}, y tick label style={font=\scriptsize},
             axis lines=left, ylabel={\scriptsize Democrats' chance (markets)},
@@ -398,38 +398,38 @@
             every node near coord/.append style={font=\scriptsize, above left}]
           \draw[muted, dashed] (axis cs:0,50) -- (axis cs:23,50);
           \addplot[very thick, dem, mark=*, mark options={fill=dem}] coordinates
-            {(2,18) (12,33) (14,51) (21,64)};
+            {(2,18) (12,33) (14,51) (21,64) (22,74)};
         \end{axis}
       \end{tikzpicture}
     \end{column}
   \end{columns}
-  \source{Approximate prediction-market prices (Polymarket and Kalshi), as reported by Yahoo News and Polymarket.}
+  \source{Approximate prediction-market prices (Polymarket and Kalshi), as reported by Yahoo News, Polymarket and Quartz.}
 \end{frame}
 
 \begin{frame}{Democrats: flipping red states?}
   \begin{columns}[T]
     \begin{column}{0.47\textwidth}
       \centering
-      \includegraphics[height=2.4cm]{talarico.jpg}\\[0.4em]
+      \includegraphics[height=2.2cm]{talarico.jpg}\\[0.4em]
       {\large\bfseries\color{dem}James Talarico}\\[0.1em]
       {\small Texas \textbullet\ vs.\ Ken Paxton (R)}
       \begin{itemize}\small
-        \item Texas hasn't elected a Democrat to the Senate since \alert{1988}
-        \item Polls: Talarico ahead by about 2 points
+        \item Texas hadn't elected a Democrat to the Senate since \alert{1988}
+        \item Final polls: Talarico ahead by about 3 points
       \end{itemize}
     \end{column}
     \begin{column}{0.47\textwidth}
       \centering
-      \includegraphics[height=2.4cm]{peltola.jpg}\\[0.4em]
+      \includegraphics[height=2.2cm]{peltola.jpg}\\[0.4em]
       {\large\bfseries\color{dem}Mary Peltola}\\[0.1em]
       {\small Alaska \textbullet\ vs.\ Sen.\ Dan Sullivan (R)}
       \begin{itemize}\small
-        \item Alaska hasn't elected a Democrat to the Senate since \alert{2008}
-        \item Polls: very close, Peltola slightly ahead
+        \item Alaska hadn't elected a Democrat to the Senate since \alert{2008}
+        \item Final polls: very close, Peltola slightly ahead
       \end{itemize}
     \end{column}
   \end{columns}
-  \source{Photos: Antonioaesparza, CC BY-SA 4.0; U.S.\ House of Representatives.}
+  \source{Polls: Silver Bulletin (Texas), New York Times/Siena (Alaska, 48--46). Photos: Antonioaesparza, CC BY-SA 4.0; U.S.\ House of Representatives.}
 \end{frame}
 
 \begin{frame}{But also: Democratic infighting}
@@ -441,8 +441,8 @@
         \item \textbf{July 10:} Platner drops out after a sexual assault allegation (which he denies) and other scandals: old Reddit posts and a tattoo resembling a Nazi symbol
         \item \textbf{Troy Jackson} had just \alert{lost} the primary for governor (3rd place)
         \item \textbf{July 25:} The party picks Jackson as the new candidate at a convention
-        \item Mills refuses to endorse him; Collins has more money in the bank
-        \item Today: a \alert{toss-up}, Jackson ahead by about 2 points
+        \item Mills refused to endorse him; Collins had more money in the bank
+        \item Final polls: a \alert{close race}, Jackson ahead by about 4 points
       \end{itemize}
     \end{column}
     \begin{column}{0.34\textwidth}
@@ -486,18 +486,18 @@
         \item Moderate vs.\ progressive
         \item Stevens and her allies spent about 9 times more on ads
         \item El-Sayed won, 48.5\% to 47.5\%
-        \item He now faces Republican Mike Rogers
+        \item He went on to face Republican Mike Rogers in November
       \end{itemize}
     \end{column}
   \end{columns}
   \source{Quotes: Michigan Senate primary debate, July 27, 2026. Ad spending: AdImpact via CNBC.}
 \end{frame}
 
-\begin{frame}{How have Republicans responded?}
+\begin{frame}{How did Republicans respond?}
   \begin{itemize}\setlength{\itemsep}{0.9em}
-    \item Facing bad polls, Trump and the Republicans have tried to \alert{change the rules} before November
-    \item \textbf{Supporters say:} the new rules stop non-citizens from voting and prevent fraud
-    \item \textbf{Critics say:} non-citizen voting is extremely rare; the real goal is to make voting harder and \alert{tilt the election}
+    \item Facing bad polls, Trump and the Republicans tried to \alert{change the rules} before November
+    \item \textbf{Supporters said:} the new rules would stop non-citizens from voting and prevent fraud
+    \item \textbf{Critics said:} non-citizen voting is extremely rare; the real goal was to make voting harder and \alert{tilt the election}
     \item Three main strategies:
       \begin{enumerate}
         \item New voting laws (the SAVE America Act)
@@ -512,23 +512,23 @@
     \begin{column}{0.48\textwidth}
       \textbf{The SAVE America Act}
       \begin{itemize}\setlength{\itemsep}{0.4em}\small
-        \item Would require \textbf{proof of citizenship} (e.g.\ a passport) to register and a \textbf{photo ID} to vote
+        \item Would have required \textbf{proof of citizenship} (e.g.\ a passport) to register and a \textbf{photo ID} to vote
         \item Passed the House in February, 218--213
-        \item Stuck in the Senate: not enough votes to beat the \alert{filibuster}
-        \item Trump has demanded that the Senate abolish the filibuster
+        \item Never passed the Senate: not enough votes to beat the \alert{filibuster}
+        \item Trump demanded that the Senate abolish the filibuster; Republican leaders said they didn't have the votes
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
       \textbf{Trump's mail-in voting order}
       \begin{itemize}\setlength{\itemsep}{0.4em}\small
         \item Signed March 31, 2026
-        \item The Postal Service would \alert{refuse to deliver} mail ballots to anyone not on a government-approved list
+        \item The Postal Service would have \alert{refused to deliver} mail ballots to anyone not on a government-approved list
         \item September: the Supreme Court blocked it for 2026, 7--2
-        \item Mail voting this year works as usual
+        \item Mail voting went ahead as usual
       \end{itemize}
     \end{column}
   \end{columns}
-  \source{Sources: NBC News; Votebeat.}
+  \source{Sources: NBC News; Votebeat; The Hill.}
 \end{frame}
 
 \begin{frame}{Mid-decade redistricting}
@@ -569,11 +569,11 @@
   \end{tikzpicture}
 
   \vspace{0.4em}
-  \small Net effect: roughly \alert{+9 seats for Republicans}. Virginia's Democratic map was struck down by its state court; Indiana Republicans refused to redraw.
-  \source{Estimated seat gains. *Louisiana's map is being challenged in court. Source: Wikipedia, ``2025--2026 United States redistricting.''}
+  \small On paper: roughly \alert{+9 seats for Republicans}. Virginia's Democratic map was struck down by its state court; Indiana Republicans refused to redraw.
+  \source{Planned seat gains, before the election. *Louisiana's map was challenged in court but stayed in use. Source: Wikipedia, ``2025--2026 United States redistricting.''}
 \end{frame}
 
-\begin{frame}{Money: Republicans have far more cash}
+\begin{frame}{Money: Republicans had far more cash}
   \centering
   \begin{tikzpicture}[x=0.016cm, y=-0.85cm]
     \foreach \i/\lab/\v/\col in {
@@ -590,26 +590,26 @@
   \end{tikzpicture}
 
   \vspace{0.5em}
-  \small The DNC is also \alert{\$17.6 million in debt}.
+  \small The DNC was also \alert{\$17.6 million in debt}.
   \source{Cash on hand at the end of August 2026. Source: FEC filings via CNBC.}
 \end{frame}
 
-\begin{frame}{Money: where does it come from, where does it go?}
+\begin{frame}{Money: where did it come from, where did it go?}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
-      \textbf{Where it comes from}
+      \textbf{Where it came from}
       \begin{itemize}\setlength{\itemsep}{0.4em}\small
-        \item \textbf{Billionaires:} Elon Musk is the biggest donor of 2026; Miriam Adelson gave about \$68 million
-        \item \textbf{Tech \& crypto:} the founders of Andreessen Horowitz gave \$115 million; the crypto super PAC Fairshake has over \$140 million
-        \item \textbf{But:} many Democratic \emph{candidates} raise more from small online donors (Jackson: \$20 million+)
+        \item \textbf{Billionaires:} Elon Musk was the biggest donor of 2026; Miriam Adelson gave about \$68 million
+        \item \textbf{Tech \& crypto:} the founders of Andreessen Horowitz gave \$115 million; the crypto super PAC Fairshake had over \$140 million
+        \item \textbf{But:} many Democratic \emph{candidates} raised more from small online donors (Jackson: \$20 million+)
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
-      \textbf{Where it goes}
+      \textbf{Where it went}
       \begin{itemize}\setlength{\itemsep}{0.4em}\small
         \item Super PACs can spend \alert{unlimited} money, as long as they don't coordinate with candidates
         \item Musk gave \alert{\$158 million} to the Senate Leadership Fund, which sent \$158 million to Texas to fight Talarico
-        \item Most of it pays for TV and online ads in battleground states
+        \item Most of it paid for TV and online ads in battleground states
       \end{itemize}
     \end{column}
   \end{columns}
@@ -617,7 +617,7 @@
 \end{frame}
 
 \begin{frame}{If we have time: the ads}
-  \relax See how the money plays out in the Senate battlegrounds:
+  \relax See how the money played out in the Senate battlegrounds:
   \vspace{1em}
   \begin{itemize}\setlength{\itemsep}{0.9em}
     \item \textbf{Maine:} \href{https://www.youtube.com/results?search_query=Troy+Jackson+Susan+Collins+Senate+ad}{Troy Jackson vs.\ Susan Collins}
@@ -628,28 +628,330 @@
 \end{frame}
 
 % =====================================================================
-\section{Final Activity}
+\section{The Results}
 
-\begin{frame}{Now you are informed voters}
+\begin{frame}{What Maine decided}
   \begin{columns}[c]
     \begin{column}{0.3\textwidth}
       \centering
       \includegraphics[height=3.6cm]{jackson.jpg}\\[0.3em]
-      {\bfseries\color{dem}Troy Jackson (D)}
+      {\bfseries\color{dem}Troy Jackson (D)}\\[0.1em]
+      \uncover<2->{{\fontsize{24}{28}\selectfont\bfseries\color{dem}53.8\%}}
     \end{column}
     \begin{column}{0.3\textwidth}
       \centering
       \includegraphics[height=3.6cm]{collins.jpg}\\[0.3em]
-      {\bfseries\color{rep}Susan Collins (R)}
+      {\bfseries\color{rep}Susan Collins (R)}\\[0.1em]
+      \uncover<2->{{\fontsize{24}{28}\selectfont\bfseries\color{rep}46.1\%}}
     \end{column}
     \begin{column}{0.34\textwidth}
-      \begin{itemize}\setlength{\itemsep}{0.8em}
-        \item Revisit your choice from the start of the lesson
-        \item Choose a candidate
-        \item \alert{Justify your answer!}
+      \begin{itemize}\setlength{\itemsep}{0.8em}\small
+        \item<2-> Collins conceded after almost 30 years in the Senate
+        \item<2-> A logger and union member from northern Maine beat one of the best-known senators in the country
+        \item<2-> How did \alert{our class} vote?
       \end{itemize}
     \end{column}
   \end{columns}
+  \uncover<2->{\source{Source: NBC News, 86\% counted, as of Nov.\ 4. Unofficial.}}
 \end{frame}
+
+\begin{frame}{Democrats win both chambers}
+  \centering
+  \begin{tikzpicture}[x=1.1cm, y=1cm,
+      seg/.style={font=\small\bfseries, text=white},
+      lab/.style={font=\scriptsize, text=muted}]
+    % Senate: 100 seats mapped to 10 units
+    \node[anchor=east, font=\small\bfseries, text=navy] at (-0.1,1.95) {Senate};
+    \fill[dem] (0,1.6) rectangle (5.4,2.3);
+    \fill[muted!50] (5.4,1.6) rectangle (5.6,2.3);
+    \fill[rep] (5.6,1.6) rectangle (10,2.3);
+    \node[seg] at (2.7,1.95) {54};
+    \node[seg] at (7.8,1.95) {44};
+    \draw[ink, line width=0.9pt] (5.1,1.5) -- (5.1,2.5);
+    \node[lab, anchor=south east] at (5.15,2.48) {51 needed};
+    \node[lab, anchor=south west] at (5.35,2.48) {2 uncalled};
+    % House: 435 seats mapped to 10 units
+    \node[anchor=east, font=\small\bfseries, text=navy] at (-0.1,0.35) {House};
+    \fill[dem] (0,0) rectangle (5.31,0.7);
+    \fill[muted!50] (5.31,0) rectangle (6.69,0.7);
+    \fill[rep] (6.69,0) rectangle (10,0.7);
+    \node[seg] at (2.65,0.35) {231};
+    \node[seg] at (8.35,0.35) {144};
+    \node[font=\scriptsize\bfseries, text=ink] at (6.0,0.35) {60};
+    \draw[ink, line width=0.9pt] (5.01,-0.1) -- (5.01,0.9);
+    \node[lab, anchor=south east] at (5.06,0.88) {218 needed};
+    \node[lab, anchor=south west] at (5.31,0.88) {60 uncalled};
+  \end{tikzpicture}
+
+  \vspace{1em}
+  \begin{itemize}\setlength{\itemsep}{0.5em}
+    \item Democrats flipped \alert{7 Senate seats}, and both uncalled seats are Republican-held
+    \item House projection: about \alert{258 Democrats, 177 Republicans}, the most Democratic seats since 1993
+  \end{itemize}
+  \source{NBC News, as of Nov.\ 4; the 54 includes two independents who caucus with Democrats. House estimates: NBC 258, CBS 259. Before the election: Senate 53--47 Republican, House 218--214 Republican.}
+\end{frame}
+
+\begin{frame}{Seven Senate seats flipped}
+  \centering\small
+  \renewcommand{\arraystretch}{1.12}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{State} & \textbf{\color{dem}Democrat} & \textbf{\color{rep}Republican} \\
+    \midrule
+    North Carolina & Roy Cooper 58.7 & Michael Whatley 39.1 \\
+    Texas & James Talarico 55.2 & Ken Paxton 42.9 \\
+    Maine & Troy Jackson 53.8 & Susan Collins 46.1 \\
+    South Carolina & Annie Andrews 51.1 & Darline Graham 46.7 \\
+    Kansas & Adam Hamilton 50.9 & Roger Marshall 46.1 \\
+    Iowa & Josh Turek 50.5 & Ashley Hinson 46.4 \\
+    Ohio & Sherrod Brown 50.0 & Jon Husted 45.2 \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.7em}
+  \begin{itemize}\setlength{\itemsep}{0.35em}
+    \item Kansas elected its first Democratic senator since \alert{1932}; South Carolina its first since \alert{1998}
+    \item No Democratic seat flipped to the Republicans
+  \end{itemize}
+  \source{Source: NBC News, percent of votes counted so far, as of Nov.\ 4. Unofficial.}
+\end{frame}
+
+\begin{frame}{Back to our candidates}
+  \begin{columns}[T]
+    \begin{column}{0.31\textwidth}
+      \centering
+      \includegraphics[height=2.25cm]{talarico.jpg}\\[0.4em]
+      {\large\bfseries\color{dem}James Talarico}\\[0.1em]
+      {\small Texas}\\[0.4em]
+      {\alert{\textbf{Won}}, 55--43}\\[0.4em]
+      \begin{minipage}{\linewidth}\centering\small First Democrat elected to the Senate from Texas since 1988\end{minipage}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \centering
+      \includegraphics[height=2.25cm]{elsayed.jpg}\\[0.4em]
+      {\large\bfseries\color{dem}Abdul El-Sayed}\\[0.1em]
+      {\small Michigan}\\[0.4em]
+      {\alert{\textbf{Won}}, 52.5--45.5 over Mike Rogers}\\[0.4em]
+      \begin{minipage}{\linewidth}\centering\small He will be the first Muslim U.S.\ senator\end{minipage}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \centering
+      \includegraphics[height=2.25cm]{peltola.jpg}\\[0.4em]
+      {\large\bfseries\color{dem}Mary Peltola}\\[0.1em]
+      {\small Alaska}\\[0.4em]
+      {\alert{\textbf{Too close to call}}}
+    \end{column}
+  \end{columns}
+  \source{Source: NBC News, as of Nov.\ 4. Unofficial.}
+\end{frame}
+
+\begin{frame}{Still too close to call}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Alaska}\\
+      {\small Sullivan (R) \textbf{48.5\%}, Peltola (D) \textbf{47.7\%}, 72\% counted}
+      \begin{itemize}\setlength{\itemsep}{0.2em}\small
+        \item Many uncounted votes are in rural areas expected to favor Peltola
+        \item If nobody passes 50\%, \alert{ranked-choice} counting takes place on Nov.\ 18
+        \item A second ``Dan Sullivan'', a retired teacher, is also on the ballot (1.7\%)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Mississippi}\\
+      {\small Colom (D) \textbf{48.9\%}, Hyde-Smith (R) \textbf{48.9\%}, 96\% counted}
+      \begin{itemize}\setlength{\itemsep}{0.2em}\small
+        \item Colom led by only \alert{43 votes} at one point overnight
+        \item Thousands of affidavit (provisional) ballots remain, which could take days
+        \item No runoff: the candidate with the most votes wins
+        \item A Colom win would be Mississippi's first for a Democrat since 1982
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{0.5em}
+  {\centering Final Senate range: \alert{54--46 to 56--44}, Democrats ahead in every case.\par}
+  \source{Sources: NBC News; Anchorage Daily News; Magnolia Tribune, as of Nov.\ 4.}
+\end{frame}
+
+\begin{frame}{History repeated itself}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar, width=13.5cm, height=4.5cm, bar width=9pt, clip=false,
+        ymin=-80, ymax=15, xmin=1943, xmax=2029,
+        axis x line*=bottom, axis y line*=left,
+        xtick={1946,1950,...,2026}, x tick label style={font=\tiny, rotate=90, anchor=east, /pgf/number format/1000 sep={}},
+        ytick={-60,-40,-20,0}, y tick label style={font=\scriptsize},
+        ymajorgrids, grid style={navy!8},
+        ylabel={\scriptsize House seats won or lost}, tick style={draw=none}]
+      \draw[muted] (axis cs:1943,0) -- (axis cs:2029,0);
+      \addplot[fill=oldred!35, draw=none, bar shift=0pt] coordinates {
+        (1946,-45) (1950,-29) (1954,-18) (1958,-48) (1962,-4) (1966,-47) (1970,-12)
+        (1974,-48) (1978,-15) (1982,-26) (1986,-5) (1990,-8) (1994,-52)
+        (2006,-30) (2010,-63) (2014,-13) (2018,-40) (2022,-9)};
+      \addplot[fill=muted!60, draw=none, bar shift=0pt] coordinates {(1998,5) (2002,8)};
+      \addplot[pattern=north east lines, pattern color=oldred, draw=oldred, bar shift=0pt] coordinates {(2026,-43)};
+      \node[font=\tiny\bfseries, text=oldred, anchor=north] at (axis cs:2026,-43) {about $-$43};
+      \node[font=\tiny, text=muted, anchor=north] at (axis cs:2010,-63) {$-$63};
+    \end{axis}
+  \end{tikzpicture}
+
+  \vspace{0.2em}
+  \begin{itemize}\setlength{\itemsep}{0.2em}\small
+    \item Thermostatic public opinion again: the President's party lost ground
+    \item The estimated loss is close to the \alert{37-seat} average for unpopular Presidents
+    \item Republicans lost even after redrawing maps in their favor
+  \end{itemize}
+  \source{2026 estimate: NBC News projection (177 Republican seats) compared with 220 won in 2024. Not final.}
+\end{frame}
+
+\begin{frame}{The forecasts: right direction, too low}
+  \begin{columns}[c]
+    \begin{column}{0.64\textwidth}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+            ybar=1pt, width=9.3cm, height=5.8cm, bar width=12pt,
+            ymin=0, ymax=15, enlarge x limits=0.1,
+            symbolic x coords={Texas,Maine,Michigan,Ohio,Iowa,Kansas},
+            xtick=data, x tick label style={font=\scriptsize},
+            axis lines*=left, ytick=\empty,
+            nodes near coords={+\pgfmathprintnumber[fixed,precision=1]\pgfplotspointmeta},
+            every node near coord/.append style={font=\tiny, inner sep=1.5pt},
+            ylabel={\scriptsize Democrat's lead (points)},
+            legend style={draw=none, fill=none, font=\scriptsize, at={(0.5,1.02)}, anchor=south, legend columns=2, /tikz/every even column/.append style={column sep=0.4cm}},
+            legend cell align=left, area legend]
+          \addplot[fill=navy!35, draw=none] coordinates
+            {(Texas,3.3) (Maine,3.9) (Michigan,4.9) (Ohio,3.0) (Iowa,1.1) (Kansas,4)};
+          \addplot[fill=dem, draw=none] coordinates
+            {(Texas,12.3) (Maine,7.7) (Michigan,7.0) (Ohio,4.8) (Iowa,4.1) (Kansas,4.8)};
+          \legend{Final polls, Result so far}
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{itemize}\setlength{\itemsep}{0.8em}\small
+        \item Forecasters and betting markets called both chambers correctly
+        \item Polls \alert{underestimated} Democrats in every race shown
+        \item A 74--80\% chance is not a sure thing: remember 2016
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \source{Polls: Silver Bulletin, Nov.\ 3. Results: NBC News, as of Nov.\ 4, votes still being counted.}
+\end{frame}
+
+\begin{frame}{The map war: what actually happened}
+  \relax Republicans planned \alert{up to +15 seats} in seven states. Instead:
+  \vspace{0.6em}
+  \begin{itemize}\setlength{\itemsep}{0.7em}
+    \item \textbf{Texas:} hoped for a 30--8 delegation and got 24--14. Won only 1 of 5 target seats and lost 2 seats they already held
+    \item \textbf{Florida:} targeted Democrats held on in several redrawn seats, including Kathy Castor. Some races are still being counted
+    \item \textbf{Missouri:} voters rejected the Republican map in a referendum (Prop A); Rep.\ Emanuel Cleaver won re-election
+    \item \textbf{New word: \alert{dummymander}.} A gerrymander that spreads your voters too thin, so it backfires in a bad year
+  \end{itemize}
+  \source{Sources: Texas Tribune; CBS News; KCUR; Mediaite, as of Nov.\ 4.}
+\end{frame}
+
+\begin{frame}{Did money decide it?}
+  \begin{itemize}\setlength{\itemsep}{0.7em}
+    \item The most expensive election cycle ever: about \alert{\$11.6 billion} in political ads
+    \item Texas Senate: the most expensive non-presidential race on record (over \alert{\$573 million})
+    \item Elon Musk spent at least \alert{\$474 million}, \$224 million of it in Texas
+    \item Outside groups spent about \textbf{\$300M} for Paxton and \textbf{\$80M} for Talarico. Talarico won by 12
+    \item Michigan too: about \textbf{\$169M} for Rogers, \textbf{\$94M} for El-Sayed
+    \item Remember Stevens, who outspent El-Sayed 9 to 1?
+  \end{itemize}
+  \source{Sources: AdImpact via Al Jazeera, The Hill and others (late Oct.); CNBC analysis of campaign finance records (Nov.\ 4).}
+\end{frame}
+
+\begin{frame}{Who voted how?}
+  \begin{columns}[c]
+    \begin{column}{0.46\textwidth}
+      \centering
+      \begin{tikzpicture}[x=0.052cm, y=-0.95cm]
+        \foreach \i/\lab/\v in {0/18--29/72, 1/30--44/60, 2/45--64/51, 3/65+/48} {
+          \fill[dem] (0,\i) rectangle (\v,\i+0.68);
+          \node[anchor=east, font=\small] at (-1.5,\i+0.34) {\lab};
+          \node[anchor=west, font=\small\bfseries] at (\v+1.5,\i+0.34) {\v\%};
+        }
+        \draw[muted] (0,-0.15) -- (0,3.85);
+        \node[anchor=north, font=\scriptsize, text=muted, align=center] at (36,3.95) {Share voting for the Democratic\\House candidate, by age};
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}\setlength{\itemsep}{0.7em}\small
+        \item Women 58--40 for Democrats; men tied 49--49
+        \item Latino voters 62--35 for Democrats, after about 4 in 10 voted Trump in 2024
+        \item Top issues: the \alert{economy (39\%)}, the \alert{state of democracy (32\%)}, immigration (14\%)
+        \item 62\% disapproved of Trump
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \source{Sources: NBC News Exit Poll (SSRS), Nov.\ 3; AP Voter Poll (about 80,000 voters). Preliminary.}
+\end{frame}
+
+\begin{frame}{Governors and ballot measures}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \textbf{Governors}
+      \begin{itemize}\setlength{\itemsep}{0.35em}\small
+        \item Democrats flipped \alert{5}: Georgia, Iowa, Nevada, Ohio, Texas
+        \item Democrats clinched a majority of governorships for the first time in at least 16 years
+        \item Texas Gov.\ Greg Abbott lost to Gina Hinojosa, 52.9--45.6
+        \item Keisha Lance Bottoms (Georgia): first Black woman elected governor in U.S.\ history
+        \item Kansas and Alaska: still uncalled
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Ballot measures: voters didn't simply follow party lines}
+      \begin{itemize}\setlength{\itemsep}{0.35em}\small
+        \item \textbf{Abortion rights} won in Virginia and Nevada; Missouri rejected a repeal
+        \item But Idaho rejected an abortion-rights measure
+        \item \textbf{Voter ID} passed in Ohio, North Carolina and Nevada, but failed in California
+        \item \textbf{Redistricting:} Maryland approved an amendment that could allow a new map for 2028
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \source{Sources: NBC News; France 24/AFP; Stateline, as of Nov.\ 4.}
+\end{frame}
+
+\begin{frame}{Why did it happen?}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{dem}Democrats say}
+      \begin{itemize}\setlength{\itemsep}{0.35em}\small
+        \item A ``change election'' (Hakeem Jeffries)
+        \item Voters want action on costs, health care and accountability
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{rep}Republicans say}
+      \begin{itemize}\setlength{\itemsep}{0.35em}\small
+        \item The President's party usually loses seats at the midterm (Mike Johnson)
+        \item ``I wasn't on the Ballot'' (Trump); a White House official blamed the quality of candidates
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{1em}
+  \textbf{What the exit polls show}
+  \begin{itemize}\setlength{\itemsep}{0.35em}\small
+    \item 6 in 10 said Trump was a factor in their vote
+    \item Voters disliked both parties: Democrats net $-$6, Republicans net $-$18
+  \end{itemize}
+  \source{Sources: CBS News; NBC News; RT\'E/AFP; Al Jazeera, Nov.\ 4.}
+\end{frame}
+
+\begin{frame}{What happens next?}
+  \begin{itemize}\setlength{\itemsep}{0.45em}\small
+    \item Trump stays President until \alert{January 2029}: midterms cannot remove him
+    \item The new Congress starts in \alert{January 2027}. Until then, Republicans keep control (a ``lame duck'' Congress)
+    \item Expected leaders: Hakeem Jeffries, first Black \textbf{Speaker of the House}; Chuck Schumer, \textbf{Senate Majority Leader}
+    \item Democrats can investigate, and can block Trump's nominees and laws
+    \item But Trump can \alert{veto} bills, and overriding him takes two-thirds of each chamber
+    \item The filibuster still means most bills need 60 Senate votes
+    \item Trump says he accepts the results: ``absolutely willing to accept'' them
+  \end{itemize}
+  \source{Sources: NBC News; CBS News; The Hill; New York Times via RT\'E/AFP, Nov.\ 4.}
+\end{frame}
+
 
 \end{document}
