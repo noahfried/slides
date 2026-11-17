@@ -318,11 +318,8 @@ Image: Times Square.
 - Art galleries everywhere
 - The High Line: park on old train tracks
 - Chelsea Market
-- Center of gay New York
 
 Image: the High Line.
-
-NOTE: "Center of gay New York" is historically true (Chelsea from the 1980s–90s); the older center was the West Village (next slide). Rephrase if you like.
 
 ### 28. West Village
 
