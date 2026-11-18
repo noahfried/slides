@@ -86,35 +86,24 @@
     {\small #3}
   \end{minipage}}
 
-% Ad slide: \adframe{number}{race}{thumbnail}{YouTube id}{offline file}{reveal bullets}
-\newcommand{\adframe}[6]{%
-  \begin{frame}{Ad #1: #2}
-    \begin{columns}[T]
+% Ad slide: \adframe{race}{thumbnail}{YouTube id}{offline file}{campaign info}
+\newcommand{\adframe}[5]{%
+  \begin{frame}{#1}
+    \begin{columns}[c]
       \begin{column}{0.56\textwidth}
         \centering
-        \href{https://youtu.be/#4}{%
+        \href{https://youtu.be/#3}{%
           \begin{tikzpicture}
-            \node[inner sep=0pt] (t) {\includegraphics[width=\linewidth,height=4.4cm,keepaspectratio]{#3}};
+            \node[inner sep=0pt] (t) {\includegraphics[width=\linewidth,height=4.4cm,keepaspectratio]{#2}};
             \fill[black, opacity=0.55] (t.center) circle (0.62cm);
             \fill[white] ($(t.center)+(-0.18,0.3)$) -- ($(t.center)+(-0.18,-0.3)$) -- ($(t.center)+(0.33,0)$) -- cycle;
           \end{tikzpicture}}\\[0.3em]
-        {\tiny\color{muted} Click to play: youtu.be/\detokenize{#4} \textbullet\ Offline: ads/#5\par}
+        {\tiny\color{muted} Click to play: youtu.be/\detokenize{#3} \textbullet\ Offline: ads/#4\par}
       \end{column}
       \begin{column}{0.4\textwidth}
-        \begin{minipage}[t][5cm][t]{\linewidth}
-          \only<1>{
-            {\bfseries\color{oldred}Your vote}
-            \begin{enumerate}\setlength{\itemsep}{0.9em}
-              \item Positive or attack?
-              \item Fear, anger, laughter or trust?
-              \item Will it work? \textbf{Write it down!}
-            \end{enumerate}}
-          \only<2>{
-            {\bfseries\color{navy}The answer}
-            \begin{itemize}\setlength{\itemsep}{0.6em}\small
-              #6
-            \end{itemize}}
-        \end{minipage}
+        \begin{itemize}\setlength{\itemsep}{0.8em}\small
+          #5
+        \end{itemize}
       \end{column}
     \end{columns}
   \end{frame}}
@@ -168,14 +157,14 @@
 \begin{frame}{Maine: who would you vote for?}
   \begin{columns}[T]
     \begin{column}{0.45\textwidth}
-      \candidate{jackson.jpg}{Troy Jackson (D)}{%
+      \candidate{jackson.jpg}{Troy Jackson}{%
         \begin{itemize}
           \item Logger from northern Maine
           \item Wants Medicare for All
         \end{itemize}}
     \end{column}
     \begin{column}{0.45\textwidth}
-      \candidate{collins.jpg}{Susan Collins (R)}{%
+      \candidate{collins.jpg}{Susan Collins}{%
         \begin{itemize}
           \item Senator since 1997
           \item Often votes against her party
@@ -340,73 +329,47 @@
 \guess{How much was spent on\\political ads in 2026?}{\$11.6 billion}{The most expensive election ever. Elon Musk alone: at least \$474 million.}
 
 % =====================================================================
-\section{Ad Detective}
+\section{The Ads}
 
-\begin{frame}{How to play}
-  \begin{columns}[c]
-    \begin{column}{0.58\textwidth}
-      \begin{enumerate}\setlength{\itemsep}{1em}
-        \item Watch the ad (30 seconds)
-        \item \textbf{Vote:} positive or attack?
-        \item \textbf{Vote:} which feeling?
-        \item \textbf{Predict:} will it work?
-        \item Write it down: answers come later!
-      \end{enumerate}
-    \end{column}
-    \begin{column}{0.36\textwidth}
-      \centering
-      \renewcommand{\arraystretch}{1.6}
-      \begin{tabular}{@{}c@{}}
-        {\Large\bfseries\color{oldblue}Fear} \\
-        {\Large\bfseries\color{oldred}Anger} \\
-        {\Large\bfseries\color{dem}Laughter} \\
-        {\Large\bfseries\color{navy}Trust} \\
-      \end{tabular}
-    \end{column}
-  \end{columns}
-\end{frame}
+\adframe{Maine Senate}{ad_collins.jpg}{hRLd5xuYOhs}{1\_collins.mp4}{
+  \item \textcolor{dem}{Troy Jackson (D)} vs.\ \textcolor{rep}{Susan Collins (R)}
+  \item \textbf{Made by:} Collins
+  \item Bill Green, a famous Maine TV reporter
+  \item ``Not about buying a cord of wood''}
 
-\adframe{1}{Maine Senate}{ad_collins.jpg}{hRLd5xuYOhs}{1\_collins.mp4}{
-  \item \textbf{Made by:} Susan Collins (R)
-  \item \textbf{Speaker:} Bill Green, a famous Maine TV reporter
-  \item Mostly \alert{positive}, with a jab at Jackson: ``not about buying a cord of wood''
-  \item Jackson's reply: it \emph{is} about wood --- heating costs}
+\adframe{Mississippi Senate}{ad_colom.jpg}{Nga2Q207-58}{2\_colom.mp4}{
+  \item \textcolor{dem}{Scott Colom (D)} vs.\ \textcolor{rep}{Cindy Hyde-Smith (R)}
+  \item \textbf{Made by:} Colom
+  \item Beef prices are high
+  \item Hyde-Smith: ``you have so many proteins''}
 
-\adframe{2}{Mississippi Senate}{ad_colom.jpg}{Nga2Q207-58}{2\_colom.mp4}{
-  \item \textbf{Made by:} Scott Colom (D)
-  \item \textbf{Target:} Sen.\ Cindy Hyde-Smith (R)
-  \item Asked about high beef prices, she said: ``you have so many proteins''
-  \item An attack using \alert{humor}}
+\adframe{Ohio Senate}{ad_brown.jpg}{PNQA4FuBqg0}{3\_brown.mp4}{
+  \item \textcolor{dem}{Sherrod Brown (D)} vs.\ \textcolor{rep}{Jon Husted (R)}
+  \item \textbf{Made by:} Brown
+  \item Husted took money from a friend of \alert{Jeffrey Epstein}}
 
-\adframe{3}{Ohio Senate}{ad_brown.jpg}{PNQA4FuBqg0}{3\_brown.mp4}{
-  \item \textbf{Made by:} Sherrod Brown (D)
-  \item \textbf{Target:} Sen.\ Jon Husted (R)
-  \item Says Husted took money from a friend of \alert{Jeffrey Epstein}
-  \item Then voted to block the Epstein files}
-
-\adframe{4}{North Carolina Senate}{ad_cooper.jpg}{cDHAxXWW4OM}{4\_cooper.mp4}{
+\adframe{North Carolina Senate}{ad_cooper.jpg}{cDHAxXWW4OM}{4\_cooper.mp4}{
+  \item \textcolor{dem}{Roy Cooper (D)} vs.\ \textcolor{rep}{Michael Whatley (R)}
   \item \textbf{Made by:} a Republican super PAC
-  \item \textbf{Target:} Roy Cooper (D), former governor
-  \item A grieving father blames Cooper's early prisoner releases
-  \item \alert{Twist:} the father later said he was misled and would vote for Cooper (the PAC denies it)}
+  \item Cooper released prisoners early as governor
+  \item Later, the father said he was misled (the PAC denies it)}
 
-\adframe{5}{Texas Senate}{ad_paxton.jpg}{p3xRLG-_MOc}{5\_paxton.mp4}{
-  \item \textbf{Made by:} Ken Paxton (R)
-  \item \textbf{Target:} James Talarico (D), a former teacher who studies to be a pastor
-  \item Real quotes from his sermons and podcasts
-  \item Small print: parts made with \alert{AI}}
+\adframe{Texas Senate}{ad_paxton.jpg}{p3xRLG-_MOc}{5\_paxton.mp4}{
+  \item \textcolor{dem}{James Talarico (D)} vs.\ \textcolor{rep}{Ken Paxton (R)}
+  \item \textbf{Made by:} Paxton
+  \item Talarico's sermons and podcasts
+  \item Partly made with \alert{AI}}
 
-\adframe{6}{Ohio House, 7th District}{ad_miller.jpg}{pY9c2wPxI5o}{6\_miller.mp4}{
+\adframe{Ohio House, 7th District}{ad_miller.jpg}{pY9c2wPxI5o}{6\_miller.mp4}{
+  \item \textcolor{dem}{Brian Poindexter (D)} vs.\ \textcolor{rep}{Max Miller (R)}
   \item \textbf{Made by:} a Democratic super PAC
-  \item \textbf{Target:} Rep.\ Max Miller (R)
-  \item Allegations of violence from news reports and his ex-wife (he denies them)
-  \item No music, no jokes: pure \alert{fear}}
+  \item Violence allegations against Miller (he denies them)}
 
-\adframe{7}{Bonus: Mayor of Los Angeles}{ad_pratt.jpg}{T4MHgjkdOKk}{7\_pratt.mp4}{
-  \item \textbf{Made by:} Spencer Pratt, a reality-TV star
-  \item \textbf{Target:} Mayor Karen Bass, shown as \alert{the Joker}
-  \item Pratt is Batman; almost all of it is \alert{AI}
-  \item 97 seconds long: three times a normal ad}
+\adframe{Bonus: Mayor of Los Angeles}{ad_pratt.jpg}{T4MHgjkdOKk}{7\_pratt.mp4}{
+  \item Spencer Pratt vs.\ Mayor Karen Bass
+  \item \textbf{Made by:} Pratt, a reality-TV star
+  \item Pratt as Batman, Bass as the Joker
+  \item Almost all \alert{AI}}
 
 % =====================================================================
 \section{The Results}
@@ -496,18 +459,16 @@
     \toprule
     \textbf{Ad} & \textbf{Made by} & \textbf{Result} & \textbf{Worked?} \\
     \midrule
-    1 \; Maine         & Collins (R)      & \uncover<2->{Jackson 54, Collins 46}      & \uncover<2->{\color{oldred}\textbf{No}} \\
-    2 \; Mississippi   & Colom (D)        & \uncover<3->{Colom by half a point}       & \uncover<3->{\color{dem}\textbf{Yes}} \\
-    3 \; Ohio          & Brown (D)        & \uncover<4->{Brown 50, Husted 45}         & \uncover<4->{\color{dem}\textbf{Yes}} \\
-    4 \; North Carolina & Republican PAC  & \uncover<5->{Cooper 59, Whatley 39}       & \uncover<5->{\color{oldred}\textbf{No}} \\
-    5 \; Texas         & Paxton (R)       & \uncover<6->{Talarico 55, Paxton 43}      & \uncover<6->{\color{oldred}\textbf{No}} \\
-    6 \; Ohio 7th      & Democratic PAC   & \uncover<7->{Miller lost, 45--55}          & \uncover<7->{\color{dem}\textbf{Yes}} \\
-    7 \; Los Angeles   & Pratt            & \uncover<8->{3rd in June: out of the race} & \uncover<8->{\color{oldred}\textbf{No}} \\
+    1 \; Maine         & Collins (R)      & Jackson 54, Collins 46      & \color{oldred}\textbf{No} \\
+    2 \; Mississippi   & Colom (D)        & Colom by half a point       & \color{dem}\textbf{Yes} \\
+    3 \; Ohio          & Brown (D)        & Brown 50, Husted 45         & \color{dem}\textbf{Yes} \\
+    4 \; North Carolina & Republican PAC  & Cooper 59, Whatley 39       & \color{oldred}\textbf{No} \\
+    5 \; Texas         & Paxton (R)       & Talarico 55, Paxton 43      & \color{oldred}\textbf{No} \\
+    6 \; Ohio 7th      & Democratic PAC   & Miller lost, 45--55          & \color{dem}\textbf{Yes} \\
+    7 \; Los Angeles   & Pratt            & 3rd in June: out of the race & \color{oldred}\textbf{No} \\
     \bottomrule
   \end{tabular}
 
-  \vspace{0.8em}
-  \uncover<9->{Who in our class predicted the most correctly?}
   \source{Sources: AP; NBC News; Mississippi Today; CBS News; Los Angeles Times. Unofficial results, as of Nov.\ 17.}
 \end{frame}
 
@@ -573,7 +534,7 @@
       \begin{enumerate}\setlength{\itemsep}{0.9em}
         \item In pairs, pick a candidate
         \item Positive or attack?
-        \item Pick a feeling
+        \item Funny, scary or serious?
         \item Write a slogan + script
         \item Perform it: class votes!
       \end{enumerate}
@@ -582,7 +543,7 @@
       \centering
       {\small\bfseries\color{oldred}8 minutes}\\[0.8em]
       \begin{textquote}[fontupper=\itshape, halign=center]
-        ``I'm \ldots, and I approve this message.''
+        ``I'm \ldots, and I \mbox{approve} this message.''
       \end{textquote}
       {\footnotesize\color{muted} Every U.S.\ candidate ad must end like this\par}
     \end{column}
