@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Classroom Blackjack</title>
+<style>
+:root{--felt:#14523d;--dark:#0d3b2c;--line:#2d7459;--ink:#f6f3e8;--soft:#b9d3c6;--gold:#f2c14e;--red:#c62828;--card:#fffdf7}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--felt);color:var(--ink);font:18px/1.35 system-ui,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:12px 20px;background:var(--dark)}
+h1{font-size:24px;margin:0;margin-right:auto}
+main{padding:20px;max-width:1500px;margin:auto}
+button{font:inherit;font-weight:600;color:var(--ink);background:var(--dark);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button:hover:not(:disabled){border-color:var(--gold)}
+button:disabled{opacity:.35;cursor:default}
+button.main{background:var(--gold);color:#231a00;border-color:var(--gold);font-size:22px;padding:10px 26px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+input[type=text],input[type=number]{font:inherit;color:var(--ink);background:var(--dark);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-width:0}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--gold);vertical-align:-3px}
+.setup{max-width:560px;margin:auto}
+.row{display:flex;gap:8px;margin:8px 0;align-items:center}
+.row input[type=text]{flex:1}
+.num{width:110px}
+.dealer{text-align:center;min-height:165px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));gap:14px;margin:16px 0}
+.seat{background:rgba(0,0,0,.16);border:2px solid transparent;border-radius:12px;padding:14px}
+.seat.on{border-color:var(--gold);background:rgba(0,0,0,.32)}
+.seat.off{opacity:.55}
+.top{display:flex;gap:8px;justify-content:space-between;align-items:center}
+.top strong{font-size:22px;overflow-wrap:anywhere}
+.pts{font-size:22px;font-weight:700;color:var(--gold);white-space:nowrap}
+.cards{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.dealer .cards{justify-content:center}
+.c{width:58px;height:82px;border-radius:7px;background:var(--card);color:#1b1b1b;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;line-height:1.05;font-weight:700}
+.c.r{color:var(--red)}
+.c.back{background:repeating-linear-gradient(45deg,#1d3557 0 6px,#2c4a75 6px 12px);border:3px solid var(--card)}
+.hand{padding:6px 8px;border-radius:8px;border:2px solid transparent;margin-top:6px}
+.hand.on{border-color:var(--gold)}
+.soft{color:var(--soft)}
+.win{color:#9be7a8;font-weight:700}.lose{color:#ffb0a8;font-weight:700}.push{color:var(--gold);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips button{padding:5px 10px}
+.side{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px}
+.side input{width:90px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;position:sticky;bottom:0;background:var(--felt);padding:12px 0;min-height:70px}
+.msg{font-size:22px;font-weight:600}
+dialog{max-width:560px;width:calc(100% - 32px);color:var(--ink);background:var(--dark);border:1px solid var(--line);border-radius:12px;padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog label{display:block;margin:8px 0}
+dialog h2{margin:0 0 8px}dialog p{margin:2px 0 12px 28px;font-size:16px}
+</style>
+</head>
+<body>
+<header>
+  <h1>♠ Classroom Blackjack</h1>
+  <label><input type="checkbox" id="sideMaster"> Side bets</label>
+  <button id="openOpts">Options</button>
+  <button id="newGame">New game</button>
+</header>
+<main id="app" aria-live="polite"></main>
+<dialog id="opts">
+  <h2>Side bets</h2>
+  <div class="soft">Turn on “Side bets” at the top, then choose which ones to offer. Changes take effect at the next betting round.</div>
+  <label><input type="checkbox" data-side="pp"> Perfect Pairs</label>
+  <p class="soft">Your first two cards are a pair. Same suit 25:1, same colour 12:1, other 6:1.</p>
+  <label><input type="checkbox" data-side="t3"> 21+3</label>
+  <p class="soft">Your two cards plus the dealer’s face-up card. Suited trips 100:1, straight flush 40:1, trips 30:1, straight 10:1, flush 5:1.</p>
+  <label><input type="checkbox" data-side="db"> Dealer Bust</label>
+  <p class="soft">By cards in the dealer’s busted hand. 3 cards 1:1, 4 cards 2:1, 5 cards 9:1, 6 cards 50:1, 7 cards 100:1, 8+ cards 250:1.</p>
+  <h2>House rules</h2>
+  <p class="soft" style="margin-left:0">Six decks. Blackjack pays 3:2. Dealer stands on all 17s. Double on any two cards. Split up to four hands; split aces get one card each. No insurance.<br>Keys: H hit, S stand, D double, P split, Enter deal / next.</p>
+  <button class="main" id="closeOpts">Done</button>
+</dialog>
+<script>
+"use strict";
+const KEY="classroom-blackjack-v1", MAX=10;
+const SIDES={pp:"Perfect Pairs",t3:"21+3",db:"Dealer Bust"};
+const $=s=>document.querySelector(s), app=$("#app");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>"&#"+c.charCodeAt(0)+";");
+const fmt=n=>n.toLocaleString("en-US",{maximumFractionDigits:1});
+const fresh=()=>({phase:"setup",start:1000,names:["Group 1","Group 2","Group 3","Group 4"],players:[],dealer:[],shoe:[],p:0,h:0,sideOn:false,sides:{pp:true,t3:true,db:true},msg:""});
+let S=fresh();
+try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.phase)S=x}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- rules ---------- */
+const RANKS=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+const rnd=n=>{const a=new Uint32Array(1),lim=Math.floor(4294967296/n)*n;do crypto.getRandomValues(a);while(a[0]>=lim);return a[0]%n};
+function makeShoe(){const s=[];for(let d=0;d<6;d++)for(const u of "♠♥♦♣")for(let r=1;r<=13;r++)s.push({r,u});for(let i=s.length-1;i>0;i--){const j=rnd(i+1);[s[i],s[j]]=[s[j],s[i]]}return s}
+const draw=()=>{if(!S.shoe.length)S.shoe=makeShoe();return S.shoe.pop()};
+const val=c=>c.r>10?10:c.r;
+function score(cs){let t=cs.reduce((a,c)=>a+val(c),0),soft=false;if(cs.some(c=>c.r===1)&&t+10<=21){t+=10;soft=true}return{t,soft}}
+const isBJ=cs=>cs.length===2&&score(cs).t===21;
+const red=c=>c.u==="♥"||c.u==="♦";
+function perfectPairs(a,b){if(a.r!==b.r)return[0,""];if(a.u===b.u)return[25,"perfect pair"];return red(a)===red(b)?[12,"coloured pair"]:[6,"mixed pair"]}
+function threeCard(cs){
+  const fl=cs.every(c=>c.u===cs[0].u),r=cs.map(c=>c.r).sort((a,b)=>a-b),tr=r[0]===r[2];
+  const st=(r[1]===r[0]+1&&r[2]===r[1]+1)||r.join()==="1,12,13";
+  if(tr&&fl)return[100,"suited trips"];if(st&&fl)return[40,"straight flush"];if(tr)return[30,"three of a kind"];if(st)return[10,"straight"];if(fl)return[5,"flush"];return[0,""]}
+function dealerBust(cs){if(score(cs).t<=21)return[0,""];const n=cs.length;return[n<=3?1:n===4?2:n===5?9:n===6?50:n===7?100:250,n+"-card bust"]}
+
+/* ---------- round flow ---------- */
+const sideKeys=()=>S.sideOn?Object.keys(SIDES).filter(k=>S.sides[k]):[];
+const stake=p=>p.bet+(p.bet?sideKeys().reduce((a,k)=>a+(p.sb[k]||0),0):0);
+const newPlayer=(name,pts)=>({name,pts,bet:0,sb:{},hands:[],sr:[],net:0});
+const whole=v=>Math.max(0,Math.floor(Number(v)||0));
+function fit(p){ // trim bets that no longer fit the balance
+  p.bet=Math.min(whole(p.bet),Math.floor(p.pts));let left=Math.floor(p.pts)-p.bet;
+  for(const k of Object.keys(SIDES)){if(!sideKeys().includes(k)){p.sb[k]=0;continue}p.sb[k]=Math.min(whole(p.sb[k]),left);left-=p.sb[k]}}
+function toBets(){S.phase="bet";S.dealer=[];S.msg="";for(const p of S.players){p.hands=[];p.sr=[];p.net=0;fit(p)}}
+function sidePay(p,k,[mult,label]){const b=p.sb[k],win=mult>0;if(win){p.pts+=b*(mult+1);p.net+=b*(mult+1)}p.sr.push({k,win,txt:win?`${label}, +${fmt(b*mult)}`:`−${fmt(b)}`})}
+function deal(){
+  if(S.phase!=="bet")return;
+  S.players.forEach(fit);const ins=S.players.filter(p=>p.bet>0);if(!ins.length)return;
+  if(S.shoe.length<90)S.shoe=makeShoe();
+  const keys=sideKeys();S.active=keys;S.dealer=[];S.msg="";
+  for(const p of S.players){p.hands=[];p.sr=[];p.net=0;if(!p.bet)p.sb={};else{const s=stake(p);p.pts-=s;p.net=-s;p.hands=[{cards:[],bet:p.bet}]}}
+  for(let i=0;i<2;i++){for(const p of ins)p.hands[0].cards.push(draw());S.dealer.push(draw())}
+  for(const p of ins){const c=p.hands[0].cards;
+    if(keys.includes("pp")&&p.sb.pp)sidePay(p,"pp",perfectPairs(c[0],c[1]));
+    if(keys.includes("t3")&&p.sb.t3)sidePay(p,"t3",threeCard([c[0],c[1],S.dealer[0]]));
+    if(isBJ(c)){p.hands[0].bj=true;p.hands[0].done=true}}
+  S.p=0;S.h=0;S.phase="play";
+  if(isBJ(S.dealer)){settle();return}
+  advance();
+}
+function advance(){
+  for(let i=0;i<S.players.length;i++)for(let j=0;j<S.players[i].hands.length;j++){
+    const h=S.players[i].hands[j];if(h.done)continue;
+    if(h.cards.length===1)h.cards.push(draw());
+    if(score(h.cards).t>=21||h.ace){h.done=true;continue}
+    S.p=i;S.h=j;render();return}
+  S.phase="dealer";render();setTimeout(dealerStep,900);
+}
+function dealerStep(){
+  if(S.phase!=="dealer")return;
+  const live=S.players.some(p=>p.hands.some(h=>!h.bj&&score(h.cards).t<=21));
+  const bustBet=S.active.includes("db")&&S.players.some(p=>p.hands.length&&p.sb.db);
+  if((live||bustBet)&&score(S.dealer).t<17){S.dealer.push(draw());render();setTimeout(dealerStep,900)}else settle();
+}
+function settle(){
+  const d=score(S.dealer).t,db=isBJ(S.dealer);
+  for(const p of S.players){
+    if(!p.hands.length)continue;
+    for(const h of p.hands){const t=score(h.cards).t;let pay=0;
+      if(t>21){h.res="Bust";h.cls="lose"}
+      else if(h.bj&&db||!h.bj&&!db&&t===d){h.res="Push";h.cls="push";pay=h.bet}
+      else if(h.bj){h.res="Blackjack!";h.cls="win";pay=h.bet*2.5}
+      else if(db||d<=21&&t<d){h.res="Loses";h.cls="lose"}
+      else{h.res="Wins";h.cls="win";pay=h.bet*2}
+      p.pts+=pay;p.net+=pay}
+    if(S.active.includes("db")&&p.sb.db)sidePay(p,"db",dealerBust(S.dealer))}
+  S.phase="done";S.msg=db?"Dealer has blackjack":d>21?`Dealer busts with ${d}`:`Dealer has ${d}`;render();
+}
+function cur(){if(S.phase!=="play")return null;const p=S.players[S.p],h=p.hands[S.h];return{p,h}}
+function can(a){const x=cur();if(!x)return false;const{p,h}=x;
+  if(a==="hit"||a==="stand")return true;
+  if(h.cards.length!==2||p.pts<h.bet)return false;
+  if(a==="double")return true;
+  return val(h.cards[0])===val(h.cards[1])&&p.hands.length<4}
+function act(a){
+  if(!can(a))return;const{p,h}=cur();
+  if(a==="stand")h.done=true;
+  if(a==="hit")h.cards.push(draw());
+  if(a==="double"){p.pts-=h.bet;p.net-=h.bet;h.bet*=2;h.cards.push(draw());h.done=true;h.dbl=true}
+  if(a==="split"){p.pts-=h.bet;p.net-=h.bet;const ace=h.cards[0].r===1;p.hands.splice(S.h+1,0,{cards:[h.cards.pop()],bet:h.bet,ace});h.ace=ace}
+  advance();
+}
+
+/* ---------- drawing ---------- */
+const card=c=>`<div class="c${red(c)?" r":""}" role="img" aria-label="${RANKS[c.r-1]}${c.u}"><span>${RANKS[c.r-1]}</span><span>${c.u}</span></div>`;
+const total=cs=>{const s=score(cs);return isBJ(cs)?"21":(s.soft&&s.t<21?"soft ":"")+s.t};
+function render(){
+  save();
+  $("#sideMaster").checked=S.sideOn;
+  document.querySelectorAll("[data-side]").forEach(e=>e.checked=S.sides[e.dataset.side]);
+  app.innerHTML=S.phase==="setup"?setupView():tableView();
+}
+function setupView(){return `<div class="setup"><h2>Who’s playing?</h2>
+${S.names.map((n,i)=>`<div class="row"><input type="text" maxlength="30" aria-label="Name ${i+1}" data-name="${i}" value="${esc(n)}"><button data-do="rmName" data-i="${i}" aria-label="Remove ${esc(n)}" ${S.names.length<2?"disabled":""}>✕</button></div>`).join("")}
+<div class="row"><button data-do="addName" ${S.names.length>=MAX?"disabled":""}>+ Add player / group</button></div>
+<div class="row"><label>Starting points <input class="num" type="number" min="1" step="1" id="start" value="${S.start}"></label></div>
+<div class="bar"><button class="main" data-do="begin">Start game</button></div></div>`}
+function seatBet(p,i){return `<section class="seat${p.pts<1?" off":""}">
+<div class="top"><input type="text" maxlength="30" aria-label="Name" data-pname="${i}" value="${esc(p.name)}" style="flex:1;font-weight:700"><button data-do="rmP" data-i="${i}" aria-label="Remove ${esc(p.name)}">✕</button></div>
+<div class="side"><label for="pt${i}">Points</label><input id="pt${i}" type="number" min="0" data-pts="${i}" value="${p.pts}" step="any"></div>
+${p.pts<1?`<div class="chips"><span class="lose">Out of points</span><button data-do="rebuy" data-i="${i}">Give ${fmt(S.start)}</button></div>`:`
+<div class="side"><strong>Bet</strong><input type="number" min="0" step="1" aria-label="Bet" data-bet="${i}" value="${p.bet}"></div>
+<div class="chips">${[10,50,100,500].map(n=>`<button data-do="chip" data-i="${i}" data-n="${n}">+${n}</button>`).join("")}<button data-do="allin" data-i="${i}">All in</button><button data-do="clear" data-i="${i}">Clear</button></div>
+${sideKeys().map(k=>`<div class="side"><span>${SIDES[k]}</span><input type="number" min="0" step="1" aria-label="${SIDES[k]} bet" data-sb="${k}" data-i="${i}" value="${p.sb[k]||0}"></div>`).join("")}`}
+</section>`}
+function seatPlay(p,i){const on=S.phase==="play"&&S.p===i;return `<section class="seat${on?" on":""}${p.hands.length?"":" off"}">
+<div class="top"><strong>${esc(p.name)}</strong><span class="pts">${fmt(p.pts)}</span></div>
+${p.hands.length?p.hands.map((h,j)=>`<div class="hand${on&&S.h===j&&p.hands.length>1?" on":""}"><div class="cards">${h.cards.map(card).join("")}</div><strong>${total(h.cards)}</strong> <span class="soft">bet ${fmt(h.bet)}${h.dbl?" (doubled)":""}</span> ${h.res?`<span class="${h.cls}">${h.res}</span>`:h.bj?`<span class="win">Blackjack!</span>`:score(h.cards).t>21?`<span class="lose">Bust</span>`:""}</div>`).join(""):`<div class="soft">Sitting out</div>`}
+${p.sr.map(r=>`<div>${SIDES[r.k]}: <span class="${r.win?"win":"lose"}">${r.txt}</span></div>`).join("")}
+${S.phase==="done"&&p.hands.length?`<div>Round: <span class="${p.net>0?"win":p.net<0?"lose":"push"}">${p.net>0?"+":p.net<0?"−":""}${fmt(Math.abs(p.net))}</span></div>`:""}
+</section>`}
+function tableView(){
+  const bet=S.phase==="bet",hide=S.phase==="play";
+  const d=bet?`<h2>Place your bets</h2>`:`<h2>Dealer${hide?"":": "+total(S.dealer)}</h2><div class="cards">${S.dealer.map((c,i)=>hide&&i===1?`<div class="c back" role="img" aria-label="face-down card"></div>`:card(c)).join("")}</div>`;
+  let bar="";
+  if(bet)bar=`<button data-do="addP" ${S.players.length>=MAX?"disabled":""}>+ Add player</button><button class="main" data-do="deal" ${S.players.some(p=>p.bet>0)?"":"disabled"}>Deal</button>`;
+  if(S.phase==="play")bar=`<span class="msg">${esc(S.players[S.p].name)}:</span>`+["hit","stand","double","split"].map(a=>`<button class="main" data-do="act" data-a="${a}" ${can(a)?"":"disabled"}>${a[0].toUpperCase()+a.slice(1)}</button>`).join("");
+  if(S.phase==="dealer")bar=`<span class="msg">Dealer’s turn…</span>`;
+  if(S.phase==="done")bar=`<span class="msg">${S.msg}</span><button class="main" data-do="next">Next round</button>`;
+  return `<div class="dealer" ${bet?'style="min-height:0"':""}>${d}</div><div class="grid">${S.players.map(bet?seatBet:seatPlay).join("")}</div><div class="bar">${bar}</div>`}
+
+/* ---------- input ---------- */
+const DO={
+  addName(){S.names.push("Group "+(S.names.length+1))},
+  rmName(i){S.names.splice(i,1)},
+  begin(){S.start=Math.max(1,whole(S.start));S.players=S.names.map((n,i)=>newPlayer(n.trim()||"Group "+(i+1),S.start));S.shoe=makeShoe();toBets()},
+  addP(){S.players.push(newPlayer("Group "+(S.players.length+1),S.start))},
+  rmP(i){if(S.players.length>1&&confirm(`Remove ${S.players[i].name}?`))S.players.splice(i,1)},
+  rebuy(i){S.players[i].pts=S.start},
+  chip(i,e){const p=S.players[i],used=stake(p)-p.bet;p.bet=Math.min(p.bet+ +e.n,Math.max(0,Math.floor(p.pts)-used))},
+  allin(i){const p=S.players[i];p.sb={};p.bet=Math.floor(p.pts)},
+  clear(i){S.players[i].bet=0;S.players[i].sb={}},
+  deal,next(){toBets()},act(i,e){act(e.a)}
+};
+app.addEventListener("click",e=>{const b=e.target.closest("[data-do]");if(!b||b.disabled)return;DO[b.dataset.do](+b.dataset.i,b.dataset);render()});
+// Update values in place: redrawing here would swallow a click on Deal.
+app.addEventListener("input",e=>{const t=e.target,d=t.dataset;
+  if(d.name!==undefined)S.names[d.name]=t.value;
+  else if(t.id==="start")S.start=whole(t.value);
+  else if(d.pname!==undefined)S.players[d.pname].name=t.value;
+  else if(d.bet!==undefined||d.sb){const p=S.players[d.bet??d.i],main=d.bet!==undefined;
+    const others=main?sideKeys().reduce((a,k)=>a+(p.sb[k]||0),0):p.bet+sideKeys().reduce((a,k)=>a+(k===d.sb?0:p.sb[k]||0),0);
+    const v=Math.min(whole(t.value),Math.max(0,Math.floor(p.pts)-others));
+    if(main)p.bet=v;else p.sb[d.sb]=v;
+    if(t.value!==""&&Number(t.value)!==v)t.value=v;
+    const b=app.querySelector('[data-do="deal"]');if(b)b.disabled=!S.players.some(q=>q.bet>0)}
+  save()});
+app.addEventListener("change",e=>{const d=e.target.dataset;
+  if(d.pts!==undefined){const p=S.players[d.pts];p.pts=Math.max(0,Math.floor((Number(e.target.value)||0)*2)/2);fit(p);
+    const seat=e.target.closest(".seat");e.target.value=p.pts;
+    seat.querySelectorAll("[data-bet]").forEach(x=>x.value=p.bet);seat.querySelectorAll("[data-sb]").forEach(x=>x.value=p.sb[x.dataset.sb]||0);save();
+    setTimeout(render,250)}});
+$("#sideMaster").onchange=e=>{S.sideOn=e.target.checked;render()};
+document.querySelectorAll("[data-side]").forEach(x=>x.onchange=()=>{S.sides[x.dataset.side]=x.checked;render()});
+$("#openOpts").onclick=()=>$("#opts").showModal();
+$("#closeOpts").onclick=()=>$("#opts").close();
+$("#newGame").onclick=()=>{if(S.phase!=="setup"&&!confirm("Start over? All points will be lost."))return;
+  const n=fresh();n.names=S.players.length?S.players.map(p=>p.name):S.names;n.start=S.start;n.sideOn=S.sideOn;n.sides=S.sides;S=n;render()};
+addEventListener("keydown",e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||$("#opts").open||/INPUT|BUTTON/.test(e.target.tagName)&&(e.key==="Enter"||e.target.tagName==="INPUT"))return;
+  const a={h:"hit",s:"stand",d:"double",p:"split"}[e.key.toLowerCase()];
+  if(a)act(a);else if(e.key==="Enter"){if(S.phase==="bet"){deal();render()}else if(S.phase==="done"){toBets();render()}}});
+render();
+if(S.phase==="dealer")setTimeout(dealerStep,900);
+</script>
+</body>
+</html>

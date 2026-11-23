@@ -1,5 +1,11 @@
 # Lesson Slides
 
+Interactive:
+
+- [Blackjack simulator (opens in the browser)](https://noahfried.github.io/slides/blackjack/)
+
+Slides:
+
 Click a link to download directly:
 
 - [USA Diversity and School (.pptx)](https://github.com/noahfried/slides/raw/main/USA_Diversity_and_School.pptx)
