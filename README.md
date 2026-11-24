@@ -22,6 +22,7 @@ PDF slides:
 - [Midterms (.pdf)](https://github.com/noahfried/slides/raw/main/midterms/midterms.pdf)
 - [The 2026 Midterms: combined lesson (.pdf)](https://github.com/noahfried/slides/raw/main/midterms_2026/midterms_2026.pdf)
 - [Halloween (.pdf)](https://github.com/noahfried/slides/raw/main/halloween/halloween.pdf)
+- [Wise and Otherwise: proverb game (.pdf)](https://github.com/noahfried/slides/raw/main/Wise%20and%20Otherwise_%20Game%20%281%29.pdf)
 
 Google Slides:
 
